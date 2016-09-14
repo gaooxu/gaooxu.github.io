@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  
+  <title>mysql笔记之基础1 | HelloMyWorld</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="之前学习过mysql，仅仅只是在php中使用的时候了解了一些，然而现在并不够用，所以决定开始从基础开始看，因为自己好多概念都不清楚。
+1. mysql 在linux下的安装我使用的是ubuntu 16.04 发行版">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mysql笔记之基础1">
+<meta property="og:url" content="http://hellomyworld.cc/2016/06/03/mysql笔记之基础1/index.html">
+<meta property="og:site_name" content="HelloMyWorld">
+<meta property="og:description" content="之前学习过mysql，仅仅只是在php中使用的时候了解了一些，然而现在并不够用，所以决定开始从基础开始看，因为自己好多概念都不清楚。
+1. mysql 在linux下的安装我使用的是ubuntu 16.04 发行版">
+<meta property="og:updated_time" content="2016-06-03T08:10:49.967Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="mysql笔记之基础1">
+<meta name="twitter:description" content="之前学习过mysql，仅仅只是在php中使用的时候了解了一些，然而现在并不够用，所以决定开始从基础开始看，因为自己好多概念都不清楚。
+1. mysql 在linux下的安装我使用的是ubuntu 16.04 发行版">
+  
+    <link rel="alternative" href="/atom.xml" title="HelloMyWorld" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/hellomyworld.ico">
+  
+  
+      <link href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css" rel="stylesheet">
+  
+  
+  
+      <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+      <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+  <link href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+      <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+  
+  <script src="//cdn.bootcss.com/jquery/1.9.1/jquery.min.js"></script>
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.9/clipboard.min.js"></script>
+  <script>
+      var yiliaConfig = {
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false,
+          fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+          scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.0.9/scrollreveal.min.js"
+      }
+  </script>
+
+  
+      <script>
+          yiliaConfig.rootUrl = "/";
+      </script>
+  
+
+  
+  
+</head>
+<body>
+  <!--[if lt IE 9]>
+<style> body { background: orange !important;} div#container { display: none;} </style>
+<p id="ie-updater">
+    
+        IE6/7/8 aren't Supported<br>Please UPDATE your Browser!<br>
+    
+    <a href="//www.bing.com/search?q=Chrome" target="_blank">Chrome</a>, <a href="//www.bing.com/search?q=Firefox" target="_blank">Firefox</a><br>
+    Hexo Theme <a href="//github.com/MOxFIVE/hexo-theme-yelee" target="_blank">Yelee</a> by MOxFIVE
+</p>
+<![endif]-->
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/avatar.png" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">gaoxu</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">程序那些事儿</p>
+        
+                
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="mailto:gao_xu@126.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="https://github.com/gaobao/" title="GitHub"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html/">html</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javaScript/">javaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/">php</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/psr/">psr</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/strpos/">strpos</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/strtoupper/">strtoupper</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/swoole/">swoole</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ubuntu16-04/">ubuntu16.04</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vpn/">vpn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/代码规范/">代码规范</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端/">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/回调/">回调</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/基础/">基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/安装/">安装</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/概念/">概念</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/规范/">规范</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/转载/">转载</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/随笔/">随笔</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">phper</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">gaoxu</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/avatar.png" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">gaoxu</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">程序那些事儿</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="mailto:gao_xu@126.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="https://github.com/gaobao/" title="GitHub"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-mysql笔记之基础1" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/06/03/mysql笔记之基础1/" class="article-date">
+      <time datetime="2016-06-03T08:01:43.000Z" itemprop="datePublished">2016-06-03</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      mysql笔记之基础1
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mysql/">mysql</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/基础/">基础</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <blockquote>
+<p>之前学习过mysql，仅仅只是在php中使用的时候了解了一些，然而现在并不够用，所以决定开始从基础开始看，因为自己好多概念都不清楚。</p>
+<h2 id="1-mysql-在linux下的安装"><a href="#1-mysql-在linux下的安装" class="headerlink" title="1. mysql 在linux下的安装"></a>1. mysql 在linux下的安装</h2><p>我使用的是ubuntu 16.04 发行版</p>
+<ul>
+<li><a id="more"></a>
+<the rest="" of="" contents="" |="" 余下全文=""><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install mysql-server mysql-client #安装过程中会提示输入mysql的密码，按提示输入即可</span><br></pre></td></tr></table></figure>
+</the></li>
+</ul>
+</blockquote>
+<p>使用一下命令可查看mysql 版本号<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysql --version</span><br><span class="line">#mysql  Ver 14.14 Distrib 5.7.12, for Linux (x86_64) using  EditLine wrapper</span><br></pre></td></tr></table></figure></p>
+<p>我本地装的是5.7<br>使用如下命令查看服务<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">netstat -npl #查看相关服务</span><br><span class="line">service mysql stop #关闭服务</span><br><span class="line">service mysql start #开启服务</span><br></pre></td></tr></table></figure></p>
+<h3 id="2-SQL-基础"><a href="#2-SQL-基础" class="headerlink" title="2. SQL 基础"></a>2. SQL 基础</h3><blockquote>
+<p>SQL 是 structure query language （结构化查询语言）的缩写<br>它是使用关系模型的数据库应用语言，由IBM在20世纪70年代开发出来，作为IBM关系数据库原型System R 的关系语言，实现了关系型数据的信息检索</p>
+</blockquote>
+<p>####sql 分为以下三类</p>
+<ul>
+<li><p>DDL Data Definition Languages 数据定义语句</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">这些语句定义了不同的数据段，数据库，表，列，索引等数据库对象，常用的语句有：create ，drop，alter</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>DML Data Manipulation Languages 数据操纵语句</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">该语句用户添加，删除，更新和查询数据库记录，并检查数据完整性。常用的语句有：insert ，delete，update，select 等</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>DCL Data Control Languages 数据控制语句</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">该语句用于控制不同数据直接的许可和访问级别的语句，这些语句定义了数据库的库，表，字段，用户的访问权限和安全级别，主要的语句包括：grant，revoke；</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="2-1-DDL-语句"><a href="#2-1-DDL-语句" class="headerlink" title="2.1 DDL 语句"></a>2.1 DDL 语句</h3><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br></pre></td><td class="code"><pre><span class="line">CREATE DATABASE test1;#创建数据库 </span><br><span class="line">SHOW DATABASE;#查看当前存在的数据库</span><br><span class="line">//结果如下</span><br><span class="line">mysql&gt; show databases;</span><br><span class="line">+--------------------+</span><br><span class="line">| Database           |</span><br><span class="line">+--------------------+</span><br><span class="line">| information_schema |</span><br><span class="line">| mysql              |</span><br><span class="line">| performance_schema |</span><br><span class="line">| sys                |</span><br><span class="line">| test1              |</span><br><span class="line">+--------------------+</span><br><span class="line">5 rows in set (0.00 sec)</span><br><span class="line"></span><br><span class="line">mysql :存储了系统的用户权限信息</span><br><span class="line">information_schema :主要存储了系统中的一些数据库对象信息,比如用户表信息,列信息.权限信息,字符信息,分区信息等</span><br><span class="line">test:mysql 测试数据库</span><br><span class="line"></span><br><span class="line">use test1;#使用数据库test1</span><br><span class="line">show tables;#查看数据库中所存在的数据表</span><br><span class="line">drop database test1;#删除数据库</span><br><span class="line"></span><br><span class="line">create table emp (ename varchar(10),hiredate date,sal decimal(10,2),deptno int(2));</span><br><span class="line">mysql&gt; desc emp; #查看表结构</span><br><span class="line">+----------+---------------+------+-----+---------+-------+</span><br><span class="line">| Field    | Type          | Null | Key | Default | Extra |</span><br><span class="line">+----------+---------------+------+-----+---------+-------+</span><br><span class="line">| ename    | varchar(10)   | YES  |     | NULL    |       |</span><br><span class="line">| hiredate | date          | YES  |     | NULL    |       |</span><br><span class="line">| sal      | decimal(10,2) | YES  |     | NULL    |       |</span><br><span class="line">| deptno   | int(2)        | YES  |     | NULL    |       |</span><br><span class="line">+----------+---------------+------+-----+---------+-------+</span><br><span class="line">4 rows in set (0.00 sec)</span><br><span class="line">#查看创建表的sql语句</span><br><span class="line">mysql&gt; show create table emp\G</span><br><span class="line">*************************** 1. row ***************************</span><br><span class="line">       Table: emp</span><br><span class="line">Create Table: CREATE TABLE `emp` (</span><br><span class="line">  `ename` varchar(10) DEFAULT NULL,</span><br><span class="line">  `hiredate` date DEFAULT NULL,</span><br><span class="line">  `sal` decimal(10,2) DEFAULT NULL,</span><br><span class="line">  `deptno` int(2) DEFAULT NULL</span><br><span class="line">) ENGINE=InnoDB DEFAULT CHARSET=latin1</span><br><span class="line">1 row in set (0.00 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; desc emp;#查看表结构</span><br><span class="line">+----------+---------------+------+-----+---------+-------+</span><br><span class="line">| Field    | Type          | Null | Key | Default | Extra |</span><br><span class="line">+----------+---------------+------+-----+---------+-------+</span><br><span class="line">| ename    | varchar(10)   | YES  |     | NULL    |       |</span><br><span class="line">| hiredate | date          | YES  |     | NULL    |       |</span><br><span class="line">| sal      | decimal(10,2) | YES  |     | NULL    |       |</span><br><span class="line">| deptno   | int(2)        | YES  |     | NULL    |       |</span><br><span class="line">+----------+---------------+------+-----+---------+-------+</span><br><span class="line">4 rows in set (0.00 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; alter table emp modify ename varchar(20);#修改表结构 修改某一个字段的类型</span><br><span class="line">Query OK, 0 rows affected (0.19 sec)</span><br><span class="line">Records: 0  Duplicates: 0  Warnings: 0</span><br><span class="line"></span><br><span class="line">mysql&gt; desc emp;</span><br><span class="line">+----------+---------------+------+-----+---------+-------+</span><br><span class="line">| Field    | Type          | Null | Key | Default | Extra |</span><br><span class="line">+----------+---------------+------+-----+---------+-------+</span><br><span class="line">| ename    | varchar(20)   | YES  |     | NULL    |       |</span><br><span class="line">| hiredate | date          | YES  |     | NULL    |       |</span><br><span class="line">| sal      | decimal(10,2) | YES  |     | NULL    |       |</span><br><span class="line">| deptno   | int(2)        | YES  |     | NULL    |       |</span><br><span class="line">+----------+---------------+------+-----+---------+-------+</span><br><span class="line">4 rows in set (0.00 sec)</span><br><span class="line">##增加一个字段</span><br><span class="line"></span><br><span class="line">mysql&gt; desc emp;</span><br><span class="line">+----------+---------------+------+-----+---------+-------+</span><br><span class="line">| Field    | Type          | Null | Key | Default | Extra |</span><br><span class="line">+----------+---------------+------+-----+---------+-------+</span><br><span class="line">| ename    | varchar(20)   | YES  |     | NULL    |       |</span><br><span class="line">| hiredate | date          | YES  |     | NULL    |       |</span><br><span class="line">| sal      | decimal(10,2) | YES  |     | NULL    |       |</span><br><span class="line">| deptno   | int(2)        | YES  |     | NULL    |       |</span><br><span class="line">+----------+---------------+------+-----+---------+-------+</span><br><span class="line">4 rows in set (0.00 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; alter table emp add column age int(3);</span><br><span class="line">Query OK, 0 rows affected (0.92 sec)</span><br><span class="line">Records: 0  Duplicates: 0  Warnings: 0</span><br><span class="line"></span><br><span class="line">mysql&gt; desc emp;</span><br><span class="line">+----------+---------------+------+-----+---------+-------+</span><br><span class="line">| Field    | Type          | Null | Key | Default | Extra |</span><br><span class="line">+----------+---------------+------+-----+---------+-------+</span><br><span class="line">| ename    | varchar(20)   | YES  |     | NULL    |       |</span><br><span class="line">| hiredate | date          | YES  |     | NULL    |       |</span><br><span class="line">| sal      | decimal(10,2) | YES  |     | NULL    |       |</span><br><span class="line">| deptno   | int(2)        | YES  |     | NULL    |       |</span><br><span class="line">| age      | int(3)        | YES  |     | NULL    |       |</span><br><span class="line">+----------+---------------+------+-----+---------+-------+</span><br><span class="line">5 rows in set (0.01 sec)</span><br><span class="line"></span><br><span class="line">#删除一个字段</span><br><span class="line">mysql&gt; alter table emp drop column age;</span><br><span class="line">Query OK, 0 rows affected (0.94 sec)</span><br><span class="line">Records: 0  Duplicates: 0  Warnings: 0</span><br><span class="line"></span><br><span class="line">mysql&gt; desc emp;</span><br><span class="line">+----------+---------------+------+-----+---------+-------+</span><br><span class="line">| Field    | Type          | Null | Key | Default | Extra |</span><br><span class="line">+----------+---------------+------+-----+---------+-------+</span><br><span class="line">| ename    | varchar(20)   | YES  |     | NULL    |       |</span><br><span class="line">| hiredate | date          | YES  |     | NULL    |       |</span><br><span class="line">| sal      | decimal(10,2) | YES  |     | NULL    |       |</span><br><span class="line">| deptno   | int(2)        | YES  |     | NULL    |       |</span><br><span class="line">+----------+---------------+------+-----+---------+-------+</span><br><span class="line">4 rows in set (0.00 sec)</span><br><span class="line">#更改表名称</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2016/06/03/mysql笔记之基础1/">mysql笔记之基础1</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">gaoxu</a></p>
+        <p><span>发布时间:</span>2016-06-03, 16:01:43</p>
+        <p><span>最后更新:</span>2016-06-03, 16:10:49</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2016/06/03/mysql笔记之基础1/" title="mysql笔记之基础1">http://hellomyworld.cc/2016/06/03/mysql笔记之基础1/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://hellomyworld.cc/2016/06/03/mysql笔记之基础1/　　作者: gaoxu" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2016/06/03/mysql笔记之基础2/">
+                    mysql笔记之基础2
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2016/06/03/项目目录规范/">
+                    项目目录规范
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-mysql-在linux下的安装"><span class="toc-number">1.</span> <span class="toc-text">1. mysql 在linux下的安装</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-SQL-基础"><span class="toc-number">1.1.</span> <span class="toc-text">2. SQL 基础</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-DDL-语句"><span class="toc-number">1.2.</span> <span class="toc-text">2.1 DDL 语句</span></a></li></ol></li></ol>
+</div>
+<style>
+    .left-col .switch-btn {
+        display: none;
+    }
+    .left-col .switch-area {
+        display: none;
+    }
+</style>
+
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+            $(".switch-btn, .switch-area").fadeOut(300);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+            $(".switch-btn, .switch-area").fadeIn(500);
+        }
+    })
+
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+        $(".switch-btn, .switch-area").show();
+    }
+</script>
+
+
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"mysql笔记之基础1　| HelloMyWorld　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+      <div class="duoshuo" id="comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="2016/06/03/mysql笔记之基础1/" data-title="mysql笔记之基础1" data-url="http://hellomyworld.cc/2016/06/03/mysql笔记之基础1/"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:"hellomyworld"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] 
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+    </script>
+    <!-- 多说公共JS代码 end -->
+</div>
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2016/06/03/mysql笔记之基础2/" title="上一篇: mysql笔记之基础2">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2016/06/03/项目目录规范/" title="下一篇: 项目目录规范">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/06/20/ubuntu安装nginx/">ubuntu安装nginx</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/03/安装swoole1-8-5stable/">安装swoole1.8.5stable</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/03/ubuntu下安装php，mysql，apache/">ubuntu下安装php，mysql，apache</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/03/安装ubuntu16-04/">安装ubuntu16.04</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/03/mysql笔记之基础2/">mysql笔记之基础2</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/03/mysql笔记之基础1/">mysql笔记之基础1</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/03/项目目录规范/">项目目录规范</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/03/css代码规范/">css代码规范</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/03/html代码规范/">html代码规范</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/03/JavaScript代码规范/">JavaScript代码规范</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/03/前端代码规范/">前端代码规范</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/03/php代码规范/">php代码规范</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/27/vpn推荐/">vpn推荐</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/24/回调/">概念学习 回调</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/24/说在前边的话/">说在前边的话</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/24/php再学习1/">php再学习1</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2016 gaoxu
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" >本站到访数: 
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">本页阅读量: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.1.22/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>
